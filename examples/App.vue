@@ -2,7 +2,10 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/pageButton">测试button</router-link>
+      <router-link to="/pageButton">测试button</router-link> |
+      <router-link to="/pageDivider">测试分隔条</router-link> |
+      <router-link to="/pageSlider">测试轮播图组件</router-link> |
+
     </div>
     <router-view/>
   </div>

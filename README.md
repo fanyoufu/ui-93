@@ -52,3 +52,8 @@ Vue.use(UI)
     <my-button disabled size="massive" icon="warning circle">warning circle</my-button>
     <br>
 ```
+
+
+### divider
+分隔条组件
+

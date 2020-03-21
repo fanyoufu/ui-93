@@ -40,7 +40,7 @@ export default {
         // 如果传入的size是：mini,medium,huge,massive.... 就ok
         // 否则就返回false
         // console.log(val)
-        // includes检查这个数组中，是否包含这个元素。
+        // includes 检查这个数组中，是否包含这个元素。
         return ['mini', 'tiny', 'small', 'medium', 'large', 'big', 'huge', 'massive'].includes(val)
       }
     },
