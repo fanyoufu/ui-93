@@ -1,12 +1,15 @@
 <template>
-  <div class="slider">
+  <div class="slider" @click="hClick" @mouseleave="hMouseleave" @mouseenter="hMouseenter">
     <div class="slider-content">
-      <div class="slider-item"
-      v-show="idx===currentIdx"
-      v-for="(item,idx) in list"
-      :key="idx">
-        <img :src="item.url" :alt="item.alt" />
-      </div>
+      <!-- name会自动解析成fade-leave-active,fade-enter-acitive.... -->
+      <transition-group name="fade">
+        <div class="slider-item"
+        v-show="idx===currentIdx"
+        v-for="(item,idx) in list"
+        :key="item.url">
+          <img :src="item.url" :alt="item.alt" />
+        </div>
+      </transition-group>
 
     </div>
 
@@ -19,7 +22,13 @@
     <!-- 指示条 -->
     <ol class="indirector">
       <!-- // 只是idx是当前要显示的图，才会添加current -->
-      <li v-for="(item,idx) in list" :key="idx" :class="{current:idx===currentIdx}"></li>
+      <!-- @mouseenter="   currentIdx=idx   " -->
+      <li
+      v-for="(item,idx) in list"
+      :key="idx"
+      @mouseenter="hDirectorEnter(idx)"
+      :class="{current:idx===currentIdx}">
+      </li>
 
       <!-- <li class="current"></li> -->
     </ol>
@@ -51,10 +60,45 @@ export default {
     return {
       // 自定义数据项来接收curIdx属性。
       // 因为在组件内部，不允许改props值的
-      currentIdx: this.curIdx
+      currentIdx: this.curIdx,
+      timer: null
     }
   },
+  created () {
+    // 如果用户设置auto，则开启定时播放功能
+    this.move()
+  },
   methods: {
+    hClick () {
+      // 把点击事件抛给父级组件，告别父组件是哪张图被点击了
+      this.$emit('click', this.currentIdx)
+    },
+    hDirectorEnter (idx) {
+      console.log('鼠标进入的指示条', idx)
+      // 设置它为 当前图片索引
+      this.currentIdx = idx
+    },
+    move () {
+      if (this.auto) {
+      // 每隔this.auto毫秒，就去执行一次：播放下一张
+      // 记录定时器编号
+        this.timer = setInterval(() => {
+          this.hNext()
+        }, this.auto)
+      }
+    },
+    hMouseenter () {
+      // 如果有定时器在工作，则要清楚定时器，这样才能让动画停下来
+      // clearInterval(定时器编号)
+      console.log('hMouseenter, 删除定时器')
+      clearInterval(this.timer)
+    },
+    hMouseleave () {
+      console.log('hMouseleave, 开启定时器')
+
+      // 重启定时器，开始自动轮播
+      this.move()
+    },
     hNext () {
       // 切换下一张
       // 本质就是修改  当前显示图片 的索引值（下标）
@@ -75,13 +119,28 @@ export default {
         this.currentIdx = this.list.length - 1
       }
     }
+  },
+  watch: {
+    currentIdx () {
+      console.log('轮播变化了 ', this.currentIdx)
+      this.$emit('sliderChange', this.currentIdx)
+    }
   }
-
 }
 </script>
 <style>
+.fade-enter-active,.fade-leave-active {
+  /* // 所有的过渡都在0.5s内完成 */
+  transition: all 0.5s ;
+}
+.fade-enter, .fade-leave-to{
+  /* transform: translateX(400px); */
+  opacity: 0;
+}
+
 .slider .slider-content,
 .slider img {
+  cursor:pointer;
   width: 100%;
   height: 100%;
 }

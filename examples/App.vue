@@ -5,6 +5,7 @@
       <router-link to="/pageButton">测试button</router-link> |
       <router-link to="/pageDivider">测试分隔条</router-link> |
       <router-link to="/pageSlider">测试轮播图组件</router-link> |
+      <router-link to="/pageHeadline">测试标题组件</router-link> |
 
     </div>
     <router-view/>
