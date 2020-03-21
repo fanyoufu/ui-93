@@ -1,33 +1,82 @@
 <template>
   <div class="slider">
     <div class="slider-content">
-      <div class="slider-item">
-        <img src="./img/4.这个杀手不太冷.jpg" alt />
+      <div class="slider-item"
+      v-show="idx===currentIdx"
+      v-for="(item,idx) in list"
+      :key="idx">
+        <img :src="item.url" :alt="item.alt" />
       </div>
 
-      <div class="slider-item">
-        <img src="./img/5.WALL_E.jpg" alt />
-      </div>
     </div>
 
     <!-- 左右按钮 -->
-    <span class="btn btn_left"></span>
-    <span class="btn btn_right"></span>
+    <span class="btn btn_left" @click="hPrev"></span>
+    <span class="btn btn_right" @click="hNext"></span>
 
     <!-- 标题区域 -->
-    <div class="txt">标题</div>
+    <div class="txt">{{this.list[currentIdx].alt}}</div>
     <!-- 指示条 -->
     <ol class="indirector">
-      <li></li>
+      <!-- // 只是idx是当前要显示的图，才会添加current -->
+      <li v-for="(item,idx) in list" :key="idx" :class="{current:idx===currentIdx}"></li>
 
-      <li class="current"></li>
-      <li></li>
+      <!-- <li class="current"></li> -->
     </ol>
   </div>
 </template>
 <script>
 export default {
-  name: 'MySlider'
+  name: 'MySlider',
+  props: {
+    // 轮播列表
+    list: {
+      type: Array,
+      required: true
+    },
+    // 当前开始播放是哪一张图
+    curIdx: {
+      type: Number,
+      default: 0,
+      required: false
+    },
+    // 自动播放的毫秒数
+    auto: {
+      type: Number,
+      default: 0, // 默认不开启自动播放
+      required: false
+    }
+  },
+  data () {
+    return {
+      // 自定义数据项来接收curIdx属性。
+      // 因为在组件内部，不允许改props值的
+      currentIdx: this.curIdx
+    }
+  },
+  methods: {
+    hNext () {
+      // 切换下一张
+      // 本质就是修改  当前显示图片 的索引值（下标）
+      // console.log(this.currentIdx)
+      this.currentIdx = this.currentIdx + 1
+
+      // 防止越界
+      if (this.currentIdx === this.list.length) {
+        this.currentIdx = 0
+      }
+      // console.log(this.currentIdx)
+    },
+    hPrev () {
+      // 切换上一张
+      this.currentIdx = this.currentIdx - 1
+      // 防止越界
+      if (this.currentIdx === -1) {
+        this.currentIdx = this.list.length - 1
+      }
+    }
+  }
+
 }
 </script>
 <style>
