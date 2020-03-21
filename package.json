@@ -1,6 +1,6 @@
 {
   "name": "ui-93",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": false,
   "main": "lib/ui-93.umd.min.js",
   "scripts": {
