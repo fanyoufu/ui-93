@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1>测试my-slider组件</h1>
+    <img src="./img/6.Hachiko.jpg" alt="">
+    <img :src="url" alt="">
 
     <my-slider style="width:250px;height:350px;"
     :auto="2000"
@@ -23,8 +25,10 @@ export default {
   name: '',
   data () {
     return {
+      url: require('./img/1.The Shawshank Redemption.jpg'),
       curIdx: 0,
-
+      // 如果图片地址是动态生成的,相对路径（保存在变量中），要写require
+      // （写在变量中，它的对立面是写死的:直接在img标签上使用src属性,这里可以不用require）
       list: [
         { url: require('./img/1.The Shawshank Redemption.jpg'), alt: '1.肖申克的救赎' },
         { url: require('./img/2.Forrest Gump.jpg'), alt: '2.阿甘正传' },
@@ -38,10 +42,10 @@ export default {
   },
   methods: {
     hSlider (idx) {
-      console.log(idx)
+      // console.log(idx)
     },
     hClick (idx) {
-      console.log('子组件slider中，第' + idx + '被点了')
+      // console.log('子组件slider中，第' + idx + '被点了')
       // 后续做什么，自行决定....
       // this.$router.push(/....)
     }

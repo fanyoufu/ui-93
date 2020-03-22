@@ -74,7 +74,7 @@ export default {
       this.$emit('click', this.currentIdx)
     },
     hDirectorEnter (idx) {
-      console.log('鼠标进入的指示条', idx)
+      // console.log('鼠标进入的指示条', idx)
       // 设置它为 当前图片索引
       this.currentIdx = idx
     },
@@ -90,11 +90,11 @@ export default {
     hMouseenter () {
       // 如果有定时器在工作，则要清楚定时器，这样才能让动画停下来
       // clearInterval(定时器编号)
-      console.log('hMouseenter, 删除定时器')
+      // console.log('hMouseenter, 删除定时器')
       clearInterval(this.timer)
     },
     hMouseleave () {
-      console.log('hMouseleave, 开启定时器')
+      // console.log('hMouseleave, 开启定时器')
 
       // 重启定时器，开始自动轮播
       this.move()
@@ -122,7 +122,7 @@ export default {
   },
   watch: {
     currentIdx () {
-      console.log('轮播变化了 ', this.currentIdx)
+      // console.log('轮播变化了 ', this.currentIdx)
       this.$emit('sliderChange', this.currentIdx)
     }
   }
