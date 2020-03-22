@@ -1,6 +1,6 @@
 {
   "name": "ui-93",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "main": "lib/ui-93.umd.min.js",
   "scripts": {
@@ -10,12 +10,12 @@
     "b": "vue-cli-service build --target lib --name ui-93 --dest lib ./packages/index.js"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "semantic-ui-css": "^2.4.1",
-    "vue": "^2.6.11",
-    "vue-router": "^3.1.5"
+    "semantic-ui-css": "^2.4.1"
   },
   "devDependencies": {
+    "core-js": "^3.6.4",
+    "vue": "^2.6.11",
+    "vue-router": "^3.1.5",
     "@vue/cli-plugin-babel": "^4.2.0",
     "@vue/cli-plugin-eslint": "^4.2.0",
     "@vue/cli-service": "^4.2.0",

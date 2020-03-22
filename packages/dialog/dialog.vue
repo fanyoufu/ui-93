@@ -80,7 +80,7 @@ export default {
     // 监视属性的变化
     // 父级组件中的v-model="abc"，如果abc的变化了，在子组父内部如何得知？
     value () {
-      console.log('v-model的值变化了', this.value)
+      // console.log('v-model的值变化了', this.value)
       // 更新子组件内部的状态
       this.isShow = this.value
     }

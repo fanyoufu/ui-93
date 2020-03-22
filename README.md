@@ -13,7 +13,11 @@ Vue.use(UI)
 ```
 
 ## 组件
-
+- 按钮
+- 轮播图
+- 分隔条
+- 标题
+- 对话框
 ### MyButton
 ```
 <my-button animated="vertical">
